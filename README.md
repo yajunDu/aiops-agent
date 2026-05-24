@@ -16,6 +16,14 @@
 
 ---
 
+<div align="center">
+
+![AIOps Agent Dashboard](docs/images/dashboard-main.png)
+
+</div>
+
+---
+
 ## 📖 项目简介
 
 **AIOps Agent** 是一个面向 Kubernetes 微服务环境的智能运维系统，将卡尼曼双过程认知理论工程化落地于云原生运维领域。系统通过"快慢双系统协同"实现从异常检测到自治自愈的完整闭环，在 TrainTicket 微服务基准平台上的 67 次真实故障注入实验中达到 **Acc@1 = 82.5%** 的根因诊断准确率。
@@ -59,6 +67,24 @@
 | 平均推理时长 | 4.7 s | 含 3 轮工具调用 |
 | 平均 MTTR | 85.7 s | kubectl + JVM 冷启动 |
 | SOP 命令成功率 | 100% | 真实 kubectl 执行 |
+
+---
+
+## 🎬 系统演示
+
+### 双系统推理过程（自由问诊 + Agent 真推理）
+
+![Reasoning Process](docs/images/reasoning-process.png)
+
+> 左侧：直连 Qwen2.5-7B 自由问答 · 右侧：LangGraph Agent 真实工具调用诊断
+
+### Grafana 集群实时大盘
+
+![Grafana Dashboard](docs/images/grafana-dashboard.png)
+
+### Neo4j 拓扑图谱
+
+![Neo4j Topology](docs/images/neo4j-topology.png)
 
 ---
 
