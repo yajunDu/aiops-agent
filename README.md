@@ -122,7 +122,7 @@
 ### 1. 拉取项目
 
 ```bash
-git clone https://github.com/YOUR_USERNAME/aiops-agent.git
+git clone https://github.com/yajunDu/aiops-agent.git
 cd aiops-agent
 ```
 
