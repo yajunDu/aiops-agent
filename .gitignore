@@ -52,3 +52,4 @@ B22042214*
 # ============ TrainTicket 子项目（上游开源代码，太大）============
 # 改为 git submodule 引用即可
 # train-ticket/
+train-ticket/
