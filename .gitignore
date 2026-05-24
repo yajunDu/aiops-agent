@@ -1,0 +1,54 @@
+# ============ Python ============
+venv/
+__pycache__/
+*.pyc
+*.pyo
+.pytest_cache/
+*.egg-info/
+.ipynb_checkpoints/
+
+# ============ Node.js ============
+node_modules/
+.next/
+out/
+dist/
+*.tsbuildinfo
+.env.local
+.env.production
+
+# ============ 实验数据（太大）============
+experiments/metrics/
+experiments/ground-truth/
+system1/outputs/*.parquet
+system1/outputs/*.joblib
+system1/outputs/*.csv
+!system1/outputs/.gitkeep
+!system1/outputs/experiment_results.csv
+
+system2/outputs/*.parquet
+!system2/outputs/system2_predictions.csv
+
+# ============ 日志和运行时 ============
+*.log
+nohup.out
+~/aiops-portforwards/
+
+# ============ 模型权重 ============
+/home/dyj/models/
+*.bin
+*.safetensors
+
+# ============ 论文敏感信息 ============
+paper-data/
+*.docx
+B22042214*
+
+# ============ IDE ============
+.vscode/
+.idea/
+*.swp
+.DS_Store
+
+# ============ TrainTicket 子项目（上游开源代码，太大）============
+# 改为 git submodule 引用即可
+# train-ticket/

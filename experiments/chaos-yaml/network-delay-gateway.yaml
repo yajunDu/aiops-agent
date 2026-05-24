@@ -1,0 +1,19 @@
+apiVersion: chaos-mesh.org/v1alpha1
+kind: NetworkChaos
+metadata:
+  name: network-delay-gateway
+  namespace: chaos-mesh
+spec:
+  action: delay
+  mode: one
+  selector:
+    namespaces: [train-ticket]
+    labelSelectors:
+      app: ts-gateway-service
+  delay:
+    latency: "300ms"
+    correlation: "100"
+    jitter: "100ms"
+  loss:
+    loss: "5"
+  duration: '3m'

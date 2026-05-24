@@ -1,0 +1,17 @@
+apiVersion: chaos-mesh.org/v1alpha1
+kind: StressChaos
+metadata:
+  name: cpu-stress-order
+  namespace: chaos-mesh
+spec:
+  mode: one
+  selector:
+    namespaces:
+      - train-ticket
+    labelSelectors:
+      app: ts-order-service
+  stressors:
+    cpu:
+      workers: 4
+      load: 95
+  duration: '3m'

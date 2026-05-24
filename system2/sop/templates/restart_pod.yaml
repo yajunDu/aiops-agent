@@ -1,0 +1,16 @@
+name: restart_pod
+display_name: 重启异常 Pod
+fault_types: [POD_KILL, CPU]
+description: 通过 kubectl delete pod 触发 Deployment 重建 Pod，适用于 Pod 假死或 CPU 异常但服务仍能恢复的场景
+params:
+  required: [pod_name, namespace]
+  optional: []
+preconditions:
+  - pod_exists
+  - in_managed_namespace
+commands:
+  - "kubectl delete pod {pod_name} -n {namespace}"
+post_check:
+  - "kubectl wait --for=condition=Ready pod -l app={app_label} -n {namespace} --timeout=180s"
+risk_level: low
+estimated_mttr_sec: 30

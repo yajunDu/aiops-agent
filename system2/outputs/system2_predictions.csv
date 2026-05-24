@@ -1,0 +1,798 @@
+last_text,exp_id,target_service,truth_fault_type,pred_root_cause,pred_fault_type,confidence,n_tool_calls,elapsed_sec,correct
+"根据收集到的证据：
+
+- CPU 指标显示 `peak_to_mean_ratio` 为 9.18，远大于 3，表明存在显著的 CPU 峰值。
+- 网络指标 `peak_to_mean_ratio` 为 1.44，未超过 3，且没有数据包丢失 (`net_drop` 未提供数据)，因此网络故障的可能性较低。
+- 重启次数没有变化 (`restart_jump` 为 0)，因此 POD_KILL 故障的可能性较低。
+
+综合以上分析，可以确定根因是 CPU 故障。
+
+最终输出如下：
+```json
+{
+  ""root_cause"": ""CPU 故障"",
+  ""confidence"": 1.0,
+ ",20260519-163019-network-gateway,ts-gateway-service,NETWORK,CPU 故障,,1.0,3,5.1,False
+"根据收集到的证据：
+
+- CPU 指标显示 `peak_to_mean_ratio` 为 6.21，远大于 3，表明存在显著的 CPU 峰值。
+- 网络指标 `peak_to_mean_ratio` 为 1.39，并且没有 `net_drop`，因此网络故障的可能性较低。
+- 重启次数没有变化，`restart_jump` 为 0.0，表明没有 POD_KILL 故障。
+
+综合以上信息，可以确定根因是 CPU 故障。
+
+最终输出如下：
+
+```json
+{
+  ""root_cause"": ""CPU 故障"",
+  ""confidence"": 1.0,
+  ""fault_type"": ""CPU"",",20260519-163414-cpu-gateway,ts-gateway-service,CPU,CPU 故障,,1.0,3,5.1,True
+"根据收集的证据：
+
+- CPU 指标：最小值、最大值、平均值和最新值均为 0.0，无显著异常。
+- 网络指标：存在显著峰值（峰均比 > 3），且最大值为 35.2736。
+- 重启次数：最大值等于最小值，无跳变现象。
+
+网络指标的 peak_to_mean_ratio > 3，并且存在显著峰值，因此可以确定根因是 NETWORK 故障。
+
+最终输出如下：
+```json
+{
+  ""root_cause"": ""网络流量异常导致峰值过高"",
+  ""confidence"": 1.0,
+  ""fault_type"": ""NETWORK"",
+  ""affected_service"": ""ts-ui-da",20260519-164343-network-ui-dashboard,ts-ui-dashboard,NETWORK,网络流量异常导致峰值过高,,1.0,3,4.5,True
+"根据收集到的证据：
+
+- CPU 指标显示 `peak_to_mean_ratio` 为 6.1，远大于 3，表明存在显著的 CPU 峰值。
+- 网络指标 `peak_to_mean_ratio` 为 1.4，未超过阈值 3，且 `net_drop` 为 0，没有丢包现象。
+- 重启次数没有变化，`restart_jump` 为 0，表示没有频繁重启的问题。
+
+因此，可以确定根因是 CPU 故障。
+
+最终输出如下：
+
+```json
+{
+  ""root_cause"": ""CPU 故障"",
+  ""confidence"": 1.0,
+  ""fault_type"": ""CPU"",
+  ""affect",20260519-164737-cpu-basic,ts-basic-service,CPU,CPU 故障,,1.0,3,4.9,True
+"根据收集到的指标数据：
+
+- CPU 指标显示 `peak_to_mean_ratio` 为 5.98，远大于 3，表明存在显著的 CPU 峰值。
+- 网络指标 `peak_to_mean_ratio` 为 1.45，未超过 3，且没有 `net_drop`，因此网络故障的可能性较低。
+- 重启次数没有变化 (`restart_jump` 为 0)，因此 POD_KILL 故障的可能性也较低。
+
+综合以上信息，可以确定根因是 CPU 故障。
+
+最终输出如下：
+```json
+{
+  ""root_cause"": ""CPU 故障"",
+  ""confidence"": 0.9,
+  ""fault_ty",20260519-165200-cpu-admin-user,ts-admin-user-service,CPU,CPU 故障,,0.9,3,4.9,True
+"根据收集到的数据：
+
+- CPU 指标显示 `peak_to_mean_ratio` 为 5.96，远大于 3，表明存在显著的 CPU 峰值。
+- 网络指标显示 `peak_to_mean_ratio` 为 1.4，没有超过 3，且 `net_drop` 为 0，因此不存在网络故障。
+- 重启次数没有变化，`restart_jump` 为 0，因此不存在 POD_KILL 故障。
+
+综合以上信息，可以确定根因是 CPU 故障。
+
+最终输出如下：
+```json
+{
+  ""root_cause"": ""CPU 故障"",
+  ""confidence"": 1.0,
+  ""fault_type"": ""C",20260519-165600-cpu-preserve,ts-preserve-service,CPU,CPU 故障,,1.0,3,6.2,True
+"根据收集到的证据：
+
+- CPU 指标显示 `peak_to_mean_ratio` 为 5.66，远大于 3，表明存在显著的 CPU 峰值。
+- 网络指标虽然 `peak_to_mean_ratio` 为 1.63，未超过 3，但没有发现丢包 (`net_drop` 为 0)，因此网络本身不是主要问题。
+- 重启次数为 0，没有发现重启次数的跳变。
+
+综合以上信息，可以确定根因是 CPU 故障。
+
+最终输出如下：
+
+```json
+{
+  ""root_cause"": ""CPU 故障"",
+  ""confidence"": 1.0,
+  ""fault_type"": ""CPU"",
+  ""affect",20260519-170350-cpu-seat,ts-seat-service,CPU,CPU 故障,,1.0,3,4.1,True
+"根据收集到的指标数据：
+
+- CPU 指标显示 `peak_to_mean_ratio` 为 6.05，远大于 3，表明存在显著的 CPU 峰值。
+- 网络指标 `peak_to_mean_ratio` 为 1.36，并且没有 `net_drop`，因此网络指标未达到故障标准。
+- 重启次数没有变化，`restart_jump` 为 0.0，因此没有 POD_KILL 故障。
+
+综合以上信息，可以确定根因是 CPU 故障。
+
+最终输出如下：
+```json
+{
+  ""root_cause"": ""CPU 故障"",
+  ""confidence"": 1.0,
+  ""fault_type"": ""CPU",20260519-170745-cpu-admin-basic-info,ts-admin-basic-info-service,CPU,CPU 故障,,1.0,3,4.4,True
+"根据收集到的证据：
+
+- CPU 指标显示 `peak_to_mean_ratio` 为 6.25，远大于 3，表明存在显著的 CPU 峰值。
+- 网络指标 `peak_to_mean_ratio` 为 1.33，并且没有 `net_drop`，因此网络故障的可能性较低。
+- 重启次数没有变化，`restart_jump` 为 0.0，表明没有 POD_KILL 故障。
+
+综合以上信息，可以确定根因是 CPU 故障。
+
+输出 JSON 结果如下：
+
+```json
+{
+  ""root_cause"": ""CPU 故障"",
+  ""confidence"": 1.0,
+  ""fault_type"": ",20260519-171537-cpu-admin-order,ts-admin-order-service,CPU,CPU 故障,,1.0,3,4.2,True
+"根据收集到的证据：
+
+- CPU 指标显示 `peak_to_mean_ratio` 为 5.46，远大于 3，表明存在显著的 CPU 峰值。
+- 网络指标显示 `peak_to_mean_ratio` 为 1.24，并且没有 `net_drop`，因此网络本身没有问题。
+- 重启次数没有变化，`restart_jump` 为 0.0，表明没有由于频繁重启导致的问题。
+
+综合以上信息，可以确定根因是 CPU 故障。
+
+最终输出如下：
+```json
+{
+  ""root_cause"": ""CPU 故障"",
+  ""confidence"": 1.0,
+  ""fault_type"": ""CPU"",
+ ",20260519-171932-cpu-basic,ts-basic-service,CPU,CPU 故障,,1.0,3,4.3,True
+"根据收集到的指标数据：
+
+- CPU 指标：`peak_to_mean_ratio = 1.36`，未超过 3，因此没有发现 CPU 故障。
+- 网络指标：`peak_to_mean_ratio = 1.45`，同样未超过 3，但 `max` 值为 130.0336，`mean` 值为 89.8276，表明网络流量波动较大，可能存在 NETWORK 故障。
+- 重启次数指标：`max = 0.0`，`mean = 0.0`，`latest = 0.0`，且 `restart_jump = 0.0`，表明没有发现 POD_KILL 故障。
+
+综合以上分析，最有可能的原因是 NETWORK 故障。",20260519-172327-network-seat,ts-seat-service,NETWORK,网络流量波动大，存在 NETWORK 故障,,0.8,3,5.1,True
+"根据收集的证据：
+
+- CPU 指标显示 `peak_to_mean_ratio` 为 6.23，远大于 3，表明存在显著的 CPU 峰值。
+- 网络指标 `peak_to_mean_ratio` 为 1.36，并且没有丢包 (`net_drop` 为 0)，因此网络故障的可能性较低。
+- 重启次数为 0，没有出现跳变，因此 POD_KILL 故障的可能性较低。
+
+综合以上信息，可以确定根因是 CPU 故障。
+
+最终输出如下：
+
+```json
+{
+  ""root_cause"": ""CPU 故障"",
+  ""confidence"": 1.0,
+  ""fault_type"": ""CPU"",
+  """,20260519-173116-cpu-seat,ts-seat-service,CPU,CPU 故障,,1.0,3,4.3,True
+"根据收集到的证据：
+
+- CPU 指标显示 `peak_to_mean_ratio` 为 7.94，远大于 3，表明存在显著的 CPU 峰值。
+- 网络指标 `peak_to_mean_ratio` 为 1.52，未超过 3，且没有丢包 (`net_drop` 为 0)，因此网络故障的可能性较低。
+- 重启次数为 0，没有出现跳变，因此 POD_KILL 故障的可能性也较低。
+
+综合以上分析，可以确定根因是 CPU 故障。
+
+最终输出如下：
+```json
+{
+  ""root_cause"": ""CPU 故障"",
+  ""confidence"": 1.0,
+  ""fault_type"": ""CPU",20260519-173513-network-seat,ts-seat-service,NETWORK,CPU 故障,,1.0,3,6.0,False
+"根据收集到的指标数据：
+
+- CPU 指标显示 `peak_to_mean_ratio` 为 5.85，远大于 3，表明存在显著的 CPU 峰值。
+- 网络指标的 `peak_to_mean_ratio` 为 1.38，没有超过 3，且 `net_drop` 为 0，没有丢包现象。
+- 重启次数没有变化，`restart_jump` 为 0，没有出现异常重启。
+
+因此，可以确定根因是 CPU 故障。
+
+最终输出如下：
+```json
+{
+  ""root_cause"": ""CPU 故障"",
+  ""confidence"": 1.0,
+  ""fault_type"": ""CPU"",
+  ""affect",20260519-173909-cpu-admin-order,ts-admin-order-service,CPU,CPU 故障,,1.0,3,4.0,True
+"根据收集到的证据：
+
+- CPU 指标显示 `peak_to_mean_ratio` 为 6.29，远大于 3，表明存在显著的 CPU 峰值。
+- 网络指标显示 `peak_to_mean_ratio` 为 1.4，未超过 3，且没有丢包 (`net_drop` 为 0)，因此网络故障的可能性较低。
+- 重启次数没有变化 (`restart_jump` 为 0)，因此 POD_KILL 故障的可能性较低。
+
+综合以上信息，可以确定根因是 CPU 故障。
+
+输出 JSON 结果如下：
+
+```json
+{
+  ""root_cause"": ""CPU 故障"",
+  ""confidence"": 1.0",20260519-174304-cpu-gateway,ts-gateway-service,CPU,CPU 故障,,1.0,3,4.3,True
+"根据收集到的指标数据：
+
+- CPU 指标显示 `peak_to_mean_ratio` 为 5.29，远大于 3，表明存在显著的 CPU 峰值。
+- 网络指标 `peak_to_mean_ratio` 为 1.24，并且没有 `net_drop`，因此网络指标未超过阈值。
+- 重启次数没有变化，`restart_jump` 为 0.0，表示没有频繁重启现象。
+
+综合以上信息，可以确定根因是 CPU 故障。
+
+最终输出如下：
+```json
+{
+  ""root_cause"": ""CPU 故障"",
+  ""confidence"": 1.0,
+  ""fault_type"": ""CPU"",
+  ""af",20260519-174701-cpu-admin-order,ts-admin-order-service,CPU,CPU 故障,,1.0,3,4.2,True
+"根据收集到的证据：
+
+- CPU 指标显示 `peak_to_mean_ratio` 为 5.83，远大于 3，表明存在显著的 CPU 峰值。
+- 网络指标 `peak_to_mean_ratio` 为 1.29，并且没有 `net_drop`，因此网络故障的可能性较低。
+- 重启次数没有变化，`restart_jump` 为 0.0，表明没有 POD_KILL 故障。
+
+综合以上信息，可以确定根因是 CPU 故障。
+
+输出 JSON 结果如下：
+
+```json
+{
+  ""root_cause"": ""CPU 故障"",
+  ""confidence"": 1.0,
+  ""fault_type"": ",20260519-175058-cpu-admin-user,ts-admin-user-service,CPU,CPU 故障,,1.0,3,4.7,True
+"根据收集到的指标数据：
+
+- CPU 指标显示 `peak_to_mean_ratio` 为 5.58，远大于 3，表明存在显著的 CPU 峰值。
+- 网络指标 `peak_to_mean_ratio` 为 1.38，没有超过 3，且 `net_drop` 为 0，没有丢包现象。
+- 重启次数没有变化，`restart_jump` 为 0，没有出现异常重启。
+
+因此，可以确定根因是 CPU 故障。
+
+最终输出如下：
+
+```json
+{
+  ""root_cause"": ""CPU 故障"",
+  ""confidence"": 1.0,
+  ""fault_type"": ""CPU"",
+  ""affect",20260519-175454-cpu-admin-order,ts-admin-order-service,CPU,CPU 故障,,1.0,3,4.1,True
+"根据收集到的证据：
+
+- CPU 指标：最小值、最大值、平均值均为 0.0，无显著波动。
+- 网络指标：存在显著峰值（峰均比 > 3），且最大值为 26.9531。
+- 重启次数：最大值等于最小值，无跳变现象。
+
+网络指标的 peak_to_mean_ratio > 3，并且存在显著峰值，因此可以确定根因是 NETWORK 故障。
+
+最终输出如下：
+```json
+{
+  ""root_cause"": ""网络流量异常导致峰值"",
+  ""confidence"": 1.0,
+  ""fault_type"": ""NETWORK"",
+  ""affected_service"": ""ts-ui-dashboa",20260519-180246-network-ui-dashboard,ts-ui-dashboard,NETWORK,网络流量异常导致峰值,,1.0,3,4.2,True
+"根据收集到的指标数据：
+
+- CPU 指标：`peak_to_mean_ratio = 1.39`，未超过 3，因此没有发现 CPU 故障。
+- 网络指标：`peak_to_mean_ratio = 1.43`，同样未超过 3，也没有发现网络故障。
+- 重启次数：`max = min`，重启次数没有变化，因此没有发现 POD_KILL 故障。
+
+综合以上分析，当前没有明显的根因。但考虑到异常分数的存在，可能存在其他未检测到的因素导致异常。建议进一步检查日志或其他监控数据。
+
+{""root_cause"": ""暂无明显根因"", ""confidence"": 0.5, ""fault_type"": ""暂",20260519-180643-network-preserve,ts-preserve-service,NETWORK,暂无明显根因,,0.5,3,4.5,False
+"根据收集的指标数据：
+
+- CPU 指标：`peak_to_mean_ratio = 1.48`，未超过 3，因此没有明显的 CPU 故障。
+- 网络指标：`peak_to_mean_ratio = 1.54`，同样未超过 3，也没有明显的网络流量波动。
+- 重启次数：`max = min = 3.0`，重启次数没有变化，也没有出现异常的重启事件。
+
+综合以上信息，当前没有足够的证据表明是 CPU 故障、NETWORK 故障或 POD_KILL 故障。需要进一步检查其他可能的原因，例如外部依赖服务的故障、内部逻辑错误等。
+
+最终输出：
+```json
+{
+  ""root_cause"": ""暂无",20260519-181039-network-admin-order,ts-admin-order-service,NETWORK,暂无明显故障,,0.5,3,6.9,False
+"根据收集到的证据：
+
+- CPU 指标显示 `peak_to_mean_ratio` 为 6.02，远大于 3，表明存在显著的 CPU 峰值。
+- 网络指标 `peak_to_mean_ratio` 为 1.38，未超过 3，且 `net_drop` 为 0，没有丢包现象。
+- 重启次数没有变化，`restart_jump` 为 0，表示没有 POD_KILL 故障。
+
+因此，可以确定根因是 CPU 故障。
+
+输出 JSON 结果如下：
+
+```json
+{
+  ""root_cause"": ""CPU 故障"",
+  ""confidence"": 1.0,
+  ""fault_type"": ""CPU""",20260519-181833-cpu-gateway,ts-gateway-service,CPU,CPU 故障,,1.0,3,4.6,True
+"根据收集到的指标数据：
+
+- CPU 指标：`peak_to_mean_ratio = 1.16`，未超过 3，因此没有发现 CPU 故障。
+- 网络指标：`peak_to_mean_ratio = 1.32`，超过了 3，并且 `net_drop` 未提供具体数值，但通常高 `peak_to_mean_ratio` 表明网络流量波动较大，可能存在网络故障。
+- 重启次数：`restart_jump = 0.0`，重启次数没有变化，因此没有发现 POD_KILL 故障。
+
+综合以上分析，最有可能的原因是 **NETWORK 故障**。
+
+最终输出如下：
+```json
+{
+  ""root_ca",20260519-182230-network-basic,ts-basic-service,NETWORK,网络流量波动大，存在网络故障,,0.8,3,4.4,True
+"根据收集到的证据：
+
+- CPU 指标显示 `peak_to_mean_ratio` 为 5.72，远大于 3，表明存在显著的 CPU 峰值。
+- 网络指标显示 `peak_to_mean_ratio` 为 1.42，并且没有 `net_drop`，因此网络本身没有问题。
+- 重启次数没有变化，`restart_jump` 为 0.0，表明没有频繁重启的问题。
+
+综合以上信息，可以确定根因是 CPU 故障。
+
+最终输出如下：
+```json
+{
+  ""root_cause"": ""CPU 故障"",
+  ""confidence"": 1.0,
+  ""fault_type"": ""CPU"",
+  ""af",20260519-182627-cpu-basic,ts-basic-service,CPU,CPU 故障,,1.0,3,4.3,True
+"根据收集到的证据：
+
+- CPU 指标显示 `peak_to_mean_ratio` 为 6.02，远大于 3，表明存在显著的 CPU 峰值。
+- 网络指标显示 `peak_to_mean_ratio` 为 1.28，未超过 3，且没有丢包 (`net_drop` 为 0)，因此网络问题可能性较低。
+- 重启次数为 0，没有出现重启次数的跳变，因此不是 POD_KILL 故障。
+
+综合以上信息，可以确定根因是 CPU 故障。
+
+最终输出如下：
+```json
+{
+  ""root_cause"": ""CPU 故障"",
+  ""confidence"": 1.0,
+  ""fault_type"": ""CP",20260519-183024-cpu-seat,ts-seat-service,CPU,CPU 故障,,1.0,3,4.2,True
+"根据收集到的指标数据：
+
+- CPU 指标：`peak_to_mean_ratio = 1.2`，未超过 3，因此没有明显的 CPU 故障。
+- 网络指标：`peak_to_mean_ratio = 1.56`，超过了 3，并且 `net_drop` 未提供具体数值，但可以推测网络流量波动较大。
+- 重启次数：`peak_to_mean_ratio = 1.0`，重启次数没有变化，也没有跳变现象。
+
+综合以上信息，最有可能的原因是 **NETWORK 故障**。
+
+最终输出如下：
+```json
+{
+  ""root_cause"": ""网络流量波动大"",
+  ""confidence"": 0.8,",20260519-183422-network-gateway,ts-gateway-service,NETWORK,网络流量波动大,,0.8,3,4.4,True
+"根据收集到的证据：
+
+- CPU 指标显示 `peak_to_mean_ratio` 为 6.6，远大于 3，表明存在显著的 CPU 峰值。
+- 网络指标显示 `peak_to_mean_ratio` 为 1.34，并且没有丢包 (`net_drop` 为 0)，因此网络故障的可能性较低。
+- 重启次数没有变化 (`restart_jump` 为 0)，因此 POD_KILL 故障的可能性较低。
+
+综合以上信息，可以确定根因是 CPU 故障。
+
+输出 JSON 结果如下：
+
+```json
+{
+  ""root_cause"": ""CPU 故障"",
+  ""confidence"": 0.9,
+  """,20260519-184221-cpu-gateway,ts-gateway-service,CPU,CPU 故障,,0.9,3,4.3,True
+"根据收集到的证据：
+
+- CPU 指标显示 `peak_to_mean_ratio` 为 7.2，远大于 3，表明存在显著的峰值。
+- 网络指标同样显示 `peak_to_mean_ratio` 为 7.09，也远大于 3，表明存在显著的峰值。
+- 重启次数没有变化 (`restart_jump` 为 0)，因此不存在 POD_KILL 故障。
+
+综合以上信息，可以判断是 CPU 故障。
+
+最终输出如下：
+```json
+{
+  ""root_cause"": ""CPU 故障"",
+  ""confidence"": 1.0,
+  ""fault_type"": ""CPU"",
+  ""affected_ser",20260519-184618-cpu-ui-dashboard,ts-ui-dashboard,CPU,CPU 故障,,1.0,3,5.8,True
+"根据收集到的指标数据：
+
+- CPU 指标显示 `peak_to_mean_ratio` 为 5.83，远大于 3，表明存在显著的 CPU 峰值。
+- 网络指标 `peak_to_mean_ratio` 为 1.26，没有超过 3，且 `net_drop` 为 0，因此不存在网络故障。
+- 重启次数没有变化 (`restart_jump` 为 0)，因此不存在 POD_KILL 故障。
+
+综合以上信息，可以确定根因是 CPU 故障。
+
+输出 JSON 结果如下：
+
+```json
+{
+  ""root_cause"": ""CPU 故障"",
+  ""confidence"": 0.9,
+  ""fault",20260519-185014-cpu-preserve,ts-preserve-service,CPU,CPU 故障,,0.9,3,4.2,True
+"根据收集到的指标数据：
+
+- CPU 指标显示 `peak_to_mean_ratio` 为 6.11，远大于 3，表明存在显著的 CPU 峰值。
+- 网络指标 `peak_to_mean_ratio` 为 1.25，没有超过阈值 3，且 `net_drop` 为 0，没有丢包现象。
+- 重启次数没有变化，`restart_jump` 为 0，没有出现异常重启。
+
+因此，可以确定根因是 CPU 故障。
+
+最终输出如下：
+
+```json
+{
+  ""root_cause"": ""CPU 故障"",
+  ""confidence"": 1.0,
+  ""fault_type"": ""CPU"",
+  ""affe",20260519-185413-cpu-admin-basic-info,ts-admin-basic-info-service,CPU,CPU 故障,,1.0,3,4.3,True
+"根据收集到的指标数据：
+
+- CPU 指标：`peak_to_mean_ratio = 2.02`，但没有超过 3，因此不判定为 CPU 故障。
+- 网络指标：`peak_to_mean_ratio = 1.43`，也没有超过 3，且 `net_drop = 0`，因此不判定为 NETWORK 故障。
+- 重启次数：`max = min`，重启次数没有变化，因此不判定为 POD_KILL 故障。
+
+综合以上分析，当前没有明显的故障迹象。但是，网络指标的波动较大，建议进一步监控和排查网络相关问题。
+
+{""root_cause"": ""暂无明显故障"", ""confidence"": 0.5, ""fau",20260519-185812-network-admin-order,ts-admin-order-service,NETWORK,暂无明显故障,,0.5,3,4.3,False
+"根据收集到的指标数据：
+
+- CPU 指标：`peak_to_mean_ratio = 1.14`，未超过 3，因此没有发现 CPU 故障。
+- 网络指标：`peak_to_mean_ratio = 1.51`，超过了 3，且 `net_drop` 未检测到丢包，因此怀疑是网络故障。
+- 重启指标：`peak_to_mean_ratio = 1.0`，重启次数没有变化，因此没有发现 POD_KILL 故障。
+
+最终结论为：存在 NETWORK 故障。
+
+输出 JSON 结果如下：
+
+```json
+{
+  ""root_cause"": ""网络故障"",
+  ""confidence"": 0.8,
+ ",20260519-190209-network-gateway,ts-gateway-service,NETWORK,网络故障,,0.8,3,4.3,True
+"根据收集到的证据：
+
+- CPU 指标显示 `peak_to_mean_ratio` 为 5.85，远大于 3，表明存在显著的 CPU 峰值。
+- 网络指标的 `peak_to_mean_ratio` 为 1.3，没有超过阈值 3，且 `net_drop` 为 0，因此网络故障的可能性较低。
+- 重启次数没有变化，`restart_jump` 为 0，表明没有 POD_KILL 故障。
+
+综合以上信息，可以确定根因是 CPU 故障。
+
+最终输出如下：
+```json
+{
+  ""root_cause"": ""CPU 故障"",
+  ""confidence"": 1.0,
+  ""fault_type"":",20260519-190607-cpu-basic,ts-basic-service,CPU,CPU 故障,,1.0,3,4.3,True
+"根据收集到的证据：
+
+- CPU 指标显示 `peak_to_mean_ratio` 为 6.79，远大于 3，表明存在显著的 CPU 峰值。
+- 网络指标显示 `peak_to_mean_ratio` 为 1.32，并且没有 `net_drop`，因此网络流量波动较大但没有丢包现象。
+- 重启次数没有变化，`restart_jump` 为 0.0，表示没有频繁重启现象。
+
+综合以上信息，可以确定根因是 CPU 故障。
+
+最终输出如下：
+
+```json
+{
+  ""root_cause"": ""CPU 故障"",
+  ""confidence"": 1.0,
+  ""fault_type"": ""CPU""",20260519-191004-cpu-gateway,ts-gateway-service,CPU,CPU 故障,,1.0,3,4.3,True
+"根据收集到的指标数据：
+
+- CPU 指标：`peak_to_mean_ratio = 1.41`，未超过 3，因此没有发现 CPU 故障。
+- 网络指标：`peak_to_mean_ratio = 1.57`，超过了 3，且 `net_drop` 未检测到丢包，因此怀疑是网络故障。
+- 重启次数：`peak_to_mean_ratio = 1.0`，重启次数没有变化，因此没有发现 POD_KILL 故障。
+
+最终结论是网络故障。
+
+输出 JSON 结果如下：
+
+```json
+{
+  ""root_cause"": ""网络故障"",
+  ""confidence"": 0.8,
+  ""fault_ty",20260519-191405-network-admin-user,ts-admin-user-service,NETWORK,网络故障,,0.8,3,6.1,True
+"根据收集到的数据：
+
+- CPU 指标：`peak_to_mean_ratio = 1.26`，未超过 3，因此没有发现 CPU 故障。
+- 网络指标：`peak_to_mean_ratio = 1.35`，超过 3，且 `net_drop` 未提供数据，因此可能存在 NETWORK 故障。
+- 重启次数：`peak_to_mean_ratio = 1.0`，无跳变，因此没有发现 POD_KILL 故障。
+
+综合以上分析，最有可能的根因是 NETWORK 故障。
+
+最终输出如下：
+```json
+{
+  ""root_cause"": ""网络流量波动较大，存在网络故障"",
+  ""confidenc",20260519-191800-network-basic,ts-basic-service,NETWORK,网络流量波动较大，存在网络故障,,0.8,3,4.2,True
+"根据收集到的数据：
+
+- CPU 指标：`peak_to_mean_ratio = 1.33`，未超过阈值 3。
+- 网络指标：`peak_to_mean_ratio = 1.32`，未超过阈值 3；`net_drop` 为 0，没有数据包丢失。
+- 重启次数：`max = min = mean = latest = 0.0`，没有出现重启次数的跳变。
+
+综合以上信息，当前没有足够的证据表明是 CPU 故障、NETWORK 故障或 POD_KILL 故障。因此，我们暂时无法确定具体的根因。
+
+{""root_cause"": ""暂无明显故障迹象"", ""confidence"": 0.0, ""faul",20260519-192159-network-seat,ts-seat-service,NETWORK,暂无明显故障迹象,,0.0,3,4.3,False
+"根据收集到的指标数据：
+
+- CPU 指标：`peak_to_mean_ratio = 1.15`，未超过 3，因此没有发现 CPU 故障。
+- 网络指标：`peak_to_mean_ratio = 1.23`，超过了 3，且 `net_drop` 未检测到丢包，因此怀疑是 NETWORK 故障。
+- 重启次数：`max = min`，没有发现 POD_KILL 故障。
+
+综合以上分析，初步判断为 NETWORK 故障。
+
+输出 JSON 结果如下：
+
+```json
+{
+  ""root_cause"": ""网络流量峰值过高导致的性能问题"",
+  ""confidence"": 0.8,
+  ""fa",20260519-192557-network-preserve,ts-preserve-service,NETWORK,网络流量峰值过高导致的性能问题,,0.8,3,4.0,True
+"根据收集到的数据：
+
+- CPU 指标：`peak_to_mean_ratio = 1.49`，但没有超过 3，因此不认为是 CPU 故障。
+- 网络指标：`peak_to_mean_ratio = 1.4`，也没有超过 3，且 `net_drop` 为 0，因此不认为是 NETWORK 故障。
+- 重启次数：`max = min`，重启次数没有变化，因此不认为是 POD_KILL 故障。
+
+综合来看，当前没有明显的故障类型。但是网络指标的波动较大，可能需要进一步关注网络流量的变化情况。
+
+最终输出：
+```json
+{
+  ""root_cause"": ""暂无明显故障"",
+  ""confide",20260519-192956-network-admin-basic-info,ts-admin-basic-info-service,NETWORK,暂无明显故障,,0.5,3,4.7,False
+"根据收集到的证据：
+
+- CPU 指标显示 `peak_to_mean_ratio` 为 6.15，远大于 3，表明存在显著的 CPU 峰值。
+- 网络指标显示 `peak_to_mean_ratio` 为 1.41，并且没有 `net_drop`，因此网络流量波动较大但没有丢包现象。
+- 重启次数没有变化，`restart_jump` 为 0.0，表明没有频繁重启的问题。
+
+综合以上信息，可以确定根因是 CPU 故障。
+
+最终输出如下：
+```json
+{
+  ""root_cause"": ""CPU 故障"",
+  ""confidence"": 0.9,
+  ""fault_type"": ""CPU""",20260519-193359-cpu-preserve,ts-preserve-service,CPU,CPU 故障,,0.9,3,4.1,True
+"根据收集的证据：
+
+- CPU 指标：`peak_to_mean_ratio = 1.1`，未超过 3，因此没有发现 CPU 故障。
+- 网络指标：`peak_to_mean_ratio = 1.29`，超过 3，且 `net_drop` 未检测到丢包，因此怀疑是网络问题。
+- 重启次数：`max = min`，没有发现 pod kill 故障。
+
+综合以上分析，初步判断为 **NETWORK 故障**。
+
+输出 JSON 结果如下：
+
+```json
+{
+  ""root_cause"": ""网络波动导致异常"",
+  ""confidence"": 0.8,
+  ""fault_type"": ""NET",20260519-194157-network-gateway,ts-gateway-service,NETWORK,网络波动导致异常,,0.8,3,4.3,True
+"根据收集到的证据：
+
+- CPU 指标显示 `peak_to_mean_ratio` 为 5.72，远大于 3，表明存在显著的峰值。
+- 网络指标显示 `peak_to_mean_ratio` 为 4.46，同样远大于 3，表明存在显著的峰值。
+- 重启次数没有变化 (`restart_jump` 为 0)，因此不存在 POD_KILL 故障。
+
+综合以上信息，可以确定根因是 CPU 故障。
+
+最终输出如下：
+```json
+{
+  ""root_cause"": ""CPU 故障"",
+  ""confidence"": 1.0,
+  ""fault_type"": ""CPU"",
+  ""affected_s",20260519-194557-cpu-ui-dashboard,ts-ui-dashboard,CPU,CPU 故障,,1.0,3,4.1,True
+"根据收集到的指标数据：
+
+- CPU 指标显示 `peak_to_mean_ratio` 为 6.6，远大于 3，表明存在显著的 CPU 峰值。
+- 网络指标 `peak_to_mean_ratio` 为 1.38，没有超过 3，且 `net_drop` 为 0，没有丢包现象。
+- 重启次数没有变化，`restart_jump` 为 0，没有出现异常重启。
+
+因此，可以确定根因是 CPU 故障。
+
+最终输出如下：
+```json
+{
+  ""root_cause"": ""CPU 故障"",
+  ""confidence"": 1.0,
+  ""fault_type"": ""CPU"",
+  ""affected",20260519-194956-cpu-preserve,ts-preserve-service,CPU,CPU 故障,,1.0,3,6.0,True
+"根据收集到的证据：
+
+- CPU 指标显示 `peak_to_mean_ratio` 为 5.65，远大于 3，表明存在显著峰值。
+- 网络指标显示 `peak_to_mean_ratio` 为 5.16，同样远大于 3，表明存在显著峰值。
+- 重启次数没有变化，`restart_jump` 为 0.0，表示没有 POD_KILL 故障。
+
+结合诊断要点：
+- cpu / throttle 的 `peak_to_mean_ratio` > 3 → CPU 故障
+- network 的 `peak_to_mean_ratio` > 3 或 net_drop > 0 → NETWORK 故障
+
+最",20260519-195354-cpu-ui-dashboard,ts-ui-dashboard,CPU,CPU 故障,,1.0,3,4.6,True
+"根据收集到的证据：
+
+- CPU 指标显示 `peak_to_mean_ratio` 为 8.41，远大于 3，表明存在显著峰值。
+- 网络指标显示 `peak_to_mean_ratio` 为 5.7，同样远大于 3，表明存在显著峰值。
+- 重启次数没有变化 (`restart_jump` 为 0)，因此不存在 POD_KILL 故障。
+
+结合以上分析，可以确定根因是 CPU 故障。
+
+最终输出如下：
+
+```json
+{
+  ""root_cause"": ""CPU 故障"",
+  ""confidence"": 1.0,
+  ""fault_type"": ""CPU"",
+  ""affected_ser",20260519-195754-network-ui-dashboard,ts-ui-dashboard,NETWORK,CPU 故障,,1.0,3,4.1,False
+"根据收集到的证据：
+
+- CPU 指标显示 `peak_to_mean_ratio` 为 6.38，远大于 3，表明存在显著的 CPU 峰值。
+- 网络指标 `peak_to_mean_ratio` 为 1.28，未超过 3，且没有 `net_drop`，因此网络故障的可能性较低。
+- 重启次数没有变化，`restart_jump` 为 0.0，表明没有 POD_KILL 故障。
+
+综合以上信息，可以确定根因是 CPU 故障。
+
+{""root_cause"": ""CPU 故障"", ""confidence"": 0.95, ""fault_type"": ""CPU"", ""affected_service",20260519-200555-cpu-admin-user,ts-admin-user-service,CPU,CPU 故障,,0.95,3,4.2,True
+"根据收集到的证据：
+
+- CPU 指标显示 `peak_to_mean_ratio` 为 5.94，远大于 3，表明存在显著峰值。
+- 网络指标显示 `peak_to_mean_ratio` 为 4.44，同样远大于 3，表明存在显著峰值。
+- 重启次数没有变化，`restart_jump` 为 0，因此不存在 POD_KILL 故障。
+
+结合诊断要点：
+- cpu / throttle 的 peak_to_mean_ratio > 3 → CPU 故障
+- network 的 peak_to_mean_ratio > 3 或 net_drop > 0 → NETWORK 故障
+
+最终结论是 ",20260519-200955-cpu-ui-dashboard,ts-ui-dashboard,CPU,CPU 故障,,1.0,3,4.6,True
+"根据收集的证据：
+
+- CPU 指标显示 `peak_to_mean_ratio` 为 8.66，远大于 3，表明存在显著峰值。
+- 网络指标显示 `peak_to_mean_ratio` 为 4.15，同样远大于 3，表明存在显著峰值。
+- 重启次数没有变化，`restart_jump` 为 0.0，因此不存在 POD_KILL 故障。
+
+综合以上信息，可以判断是 CPU 故障。
+
+最终输出如下：
+```json
+{
+  ""root_cause"": ""CPU 故障"",
+  ""confidence"": 1.0,
+  ""fault_type"": ""CPU"",
+  ""affected_servic",20260519-201354-network-ui-dashboard,ts-ui-dashboard,NETWORK,CPU 故障,,1.0,3,4.0,False
+"根据收集到的指标数据：
+
+- CPU 指标：`peak_to_mean_ratio = 1.36`，未超过 3，因此没有发现 CPU 故障。
+- 网络指标：`peak_to_mean_ratio = 1.57`，超过了 3，且 `max` 值显著高于 `mean` 值，表明网络流量波动较大。
+- 重启次数：`max` 和 `mean` 值均为 0，表示没有频繁重启现象。
+
+综合以上分析，网络指标显示异常，因此可以推断是 NETWORK 故障。
+
+最终输出如下 JSON：
+```json
+{
+  ""root_cause"": ""网络流量波动大"",
+  ""confidence"": 0.8,
+  ""f",20260519-201753-network-seat,ts-seat-service,NETWORK,网络流量波动大,,0.8,3,4.4,True
+"根据收集到的证据：
+
+- CPU 指标显示 `peak_to_mean_ratio` 为 5.52，远大于 3，表明存在显著的 CPU 峰值。
+- 网络指标显示 `peak_to_mean_ratio` 为 1.42，并且没有丢包 (`net_drop` 为 0)，因此网络本身没有问题。
+- 重启次数为 0，没有出现跳变。
+
+综合以上信息，可以确定根因是 CPU 故障。
+
+最终输出如下：
+
+```json
+{
+  ""root_cause"": ""CPU 故障"",
+  ""confidence"": 1.0,
+  ""fault_type"": ""CPU"",
+  ""affected_service"": """,20260519-202554-cpu-seat,ts-seat-service,CPU,CPU 故障,,1.0,3,4.1,True
+"根据收集到的指标数据：
+
+- CPU 指标显示 `peak_to_mean_ratio` 为 5.81，远大于 3，表明存在显著的 CPU 峰值。
+- 网络指标显示 `peak_to_mean_ratio` 为 1.44，并且没有 `net_drop`，因此网络流量波动较大但没有丢包现象。
+- 重启次数没有变化，`restart_jump` 为 0.0，表示没有频繁重启现象。
+
+综合以上信息，可以确定根因是 CPU 故障。
+
+最终输出如下：
+```json
+{
+  ""root_cause"": ""CPU 故障"",
+  ""confidence"": 1.0,
+  ""fault_type"": ""CPU",20260519-203351-cpu-admin-basic-info,ts-admin-basic-info-service,CPU,CPU 故障,,1.0,3,6.3,True
+"根据收集的证据：
+
+- CPU 指标显示 `peak_to_mean_ratio` 为 5.29，远大于 3，表明存在显著的 CPU 峰值。
+- 网络指标显示 `peak_to_mean_ratio` 为 2.72，虽然超过 3 的阈值，但没有 `net_drop` 超过 0，因此网络故障的可能性较低。
+- 重启指标显示最大重启次数为 3，且最新一次重启计数为 3，这强烈指向 POD_KILL 故障。
+
+综合以上分析，可以确定根因是 POD_KILL 故障。
+
+最终输出如下：
+
+```json
+{
+  ""root_cause"": ""POD_KILL 故障"",
+  ""confidence"": 0",20260519-211139-pod-kill-preserve,ts-preserve-service,POD_KILL,POD_KILL 故障,,0.9,3,4.8,True
+"根据收集的证据：
+
+- CPU 指标显示 `peak_to_mean_ratio` 为 5.9，远大于 3，表明存在显著的 CPU 峰值。
+- 网络指标显示 `peak_to_mean_ratio` 为 2.59，并且最大值与平均值相差不大，没有明显的网络流量峰值。
+- 重启指标显示最大值为 3.0，最小值为 0.0，存在显著的重启次数跳变，强烈指向 POD_KILL 故障。
+
+综合以上信息，可以确定根因是 POD_KILL 故障。
+
+最终输出如下：
+
+```json
+{
+  ""root_cause"": ""POD_KILL 故障"",
+  ""confidence"": 0.9,
+  ""fault_",20260519-211540-pod-kill-admin-user,ts-admin-user-service,POD_KILL,POD_KILL 故障,,0.9,3,4.4,True
+"根据收集的证据：
+
+- CPU 指标显示 `peak_to_mean_ratio` 为 6.13，远大于 3，表明存在显著的 CPU 峰值。
+- 网络指标虽然 `peak_to_mean_ratio` 为 2.39，但并未超过 3，且没有 `net_drop` 事件，因此网络故障的可能性较低。
+- 重启指标显示最大重启次数为 3，且最新一次重启计数为 3，这强烈指向了 POD_KILL 故障。
+
+综合以上信息，可以确定根因是 POD_KILL 故障。
+
+最终输出如下：
+
+```json
+{
+  ""root_cause"": ""POD_KILL 故障"",
+  ""confidence"": 0.9,
+",20260519-211941-pod-kill-basic,ts-basic-service,POD_KILL,POD_KILL 故障,,0.9,3,4.7,True
+"根据收集的证据：
+
+- CPU 指标显示 `peak_to_mean_ratio` 为 4.86，远大于 3，表明存在显著的 CPU 峰值。
+- 网络指标虽然 `peak_to_mean_ratio` 为 2.73，但并未超过 3，且没有 `net_drop` 问题。
+- 重启次数为 0，没有出现跳变。
+
+因此，可以确定根因是 CPU 故障。
+
+最终输出如下：
+```json
+{
+  ""root_cause"": ""CPU 故障"",
+  ""confidence"": 1.0,
+  ""fault_type"": ""CPU"",
+  ""affected_service"": ""ts-seat-service",20260519-212341-pod-kill-seat,ts-seat-service,POD_KILL,CPU 故障,,1.0,3,4.1,False
+"根据收集到的证据：
+
+- CPU 指标显示 `peak_to_mean_ratio` 为 9.1，远大于 3，表明存在显著的 CPU 峰值。
+- 网络指标 `peak_to_mean_ratio` 为 1.6，未超过 3，且 `net_drop` 为 0，没有网络丢包现象。
+- 重启次数的最大值为 3.0，明显高于最小值 0.0，且最新记录的重启次数为 3.0，这强烈指向 POD_KILL 故障。
+
+综合以上信息，可以确定根因是 POD_KILL 故障。
+
+最终输出如下：
+
+```json
+{
+  ""root_cause"": ""POD_KILL 故障"",
+  ""confidence"": 0.9",20260519-212743-pod-kill-gateway,ts-gateway-service,POD_KILL,POD_KILL 故障,,0.9,3,5.2,True
+"根据收集的证据：
+
+- CPU 指标显示 `peak_to_mean_ratio` 为 5.04，远大于 3，表明存在显著的 CPU 峰值。
+- 网络指标虽然 `peak_to_mean_ratio` 为 2.4，但并未超过阈值 3，且没有 `net_drop` 事件。
+- 重启指标显示最大值为 3.0，且存在明显的重启计数跳变，这强烈指向 POD_KILL 故障。
+
+综合以上信息，可以确定根因是 POD_KILL 故障。
+
+最终输出如下：
+
+```json
+{
+  ""root_cause"": ""POD_KILL 故障"",
+  ""confidence"": 0.9,
+  ""fault_type""",20260519-213144-pod-kill-admin-order,ts-admin-order-service,POD_KILL,POD_KILL 故障,,0.9,3,6.8,True
