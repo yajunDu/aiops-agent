@@ -295,15 +295,30 @@ class ChatRequest(BaseModel):
 
 @app.post("/api/chat")
 def chat_with_qwen(req: ChatRequest):
-    """智能对话 - 分意图处理：状态查询 / Agent 诊断 / 通用问答"""
+    """自由对话——直接转发到 vLLM"""
+    messages = [{"role": "system",
+                 "content": "你是一名云原生 SRE 专家助手，擅长 K8s、微服务、Prometheus、Neo4j 图谱、根因分析。回答简洁专业。"}]
+    messages.extend(req.history)
+    messages.append({"role": "user", "content": req.message})
+
     try:
-        from smart_chat import smart_chat
-        result = smart_chat(req.message, req.history)
-        return result
+        r = requests.post(
+            f"{VLLM_URL}/chat/completions",
+            json={
+                "model": "qwen2.5-7b",
+                "messages": messages,
+                "temperature": 0.3,
+                "max_tokens": 512,
+            },
+            timeout=30,
+        )
+        data = r.json()
+        return {
+            "reply": data["choices"][0]["message"]["content"],
+            "usage": data.get("usage", {}),
+        }
     except Exception as e:
-        import traceback
-        traceback.print_exc()
-        return {"reply": f"❌ Chat 失败: {e}", "error": str(e)}
+        return {"reply": f"❌ LLM 调用失败: {e}", "error": str(e)}
 
 
 # ============ Agent 真推理 ============
