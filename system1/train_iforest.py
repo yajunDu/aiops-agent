@@ -1,3 +1,5 @@
+import sys as _s; from pathlib import Path as _P
+_s.path.insert(0, str(_P(__file__).resolve().parents[1]))
 """
 11.2 V2 - 优化版
 ================
@@ -25,8 +27,8 @@ from sklearn.metrics import (
 )
 
 
-OUT = Path("~/aiops-project/system1/outputs").expanduser()
-FIG = Path("~/aiops-project/system1/figures").expanduser()
+from aiops_paths import SYSTEM1_OUT as OUT, SYSTEM1_FIG as FIG
+
 OUT.mkdir(exist_ok=True, parents=True)
 FIG.mkdir(exist_ok=True, parents=True)
 

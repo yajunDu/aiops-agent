@@ -3,6 +3,8 @@
 负责: 意图分类 + 上下文采集 + Agent 触发 + 结果包装
 """
 from __future__ import annotations
+import sys as _s; from pathlib import Path as _P
+_s.path.insert(0, str(_P(__file__).resolve().parents[1]))
 import json
 import os
 import re
@@ -14,8 +16,7 @@ from pathlib import Path
 import requests
 
 # 添加 agent 模块路径
-AGENT_PATH = Path("~/aiops-project/system2/agent").expanduser()
-TOOLS_PATH = Path("~/aiops-project/system2/agent/tools").expanduser()
+from aiops_paths import AGENT_PATH, TOOLS_PATH
 sys.path.insert(0, str(AGENT_PATH))
 sys.path.insert(0, str(TOOLS_PATH))
 

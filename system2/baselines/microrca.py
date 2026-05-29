@@ -14,6 +14,8 @@
   - fault_type：看该 service 哪个指标偏离最大
 """
 from __future__ import annotations
+import sys as _s; from pathlib import Path as _P
+_s.path.insert(0, str(_P(__file__).resolve().parents[2]))
 import json
 import sys
 from pathlib import Path
@@ -24,7 +26,7 @@ import pandas as pd
 sys.path.insert(0, str(Path(__file__).parent.parent / "agent" / "tools"))
 from tools_neo4j import query_graph_topology
 
-EXP_DIR = Path("~/aiops-project/experiments").expanduser()
+from aiops_paths import EXP_DIR, SYSTEM1_OUT
 METRICS_DIR = EXP_DIR / "metrics"
 
 
@@ -158,7 +160,7 @@ def main():
     G = build_service_graph()
     print(f"   节点: {G.number_of_nodes()}  边: {G.number_of_edges()}")
     
-    exp_df = pd.read_csv(Path("~/aiops-project/system1/outputs/experiment_results.csv").expanduser())
+    exp_df = pd.read_csv((SYSTEM1_OUT / "experiment_results.csv"))
     detected = exp_df[exp_df["detected"] == True]
     
     results = []

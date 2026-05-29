@@ -1,3 +1,5 @@
+import sys as _s; from pathlib import Path as _P
+_s.path.insert(0, str(_P(__file__).resolve().parents[1]))
 """批量故障注入 + Metrics 采集 - 论文实验数据集生成器"""
 import os
 import time
@@ -12,7 +14,7 @@ from chaos_injector import ChaosInjector
 
 
 # === 配置 ===
-EXP_DIR = Path("~/aiops-project/experiments").expanduser()
+from aiops_paths import EXP_DIR
 GT_DIR = EXP_DIR / "ground-truth"
 METRICS_DIR = EXP_DIR / "metrics"
 LOG_DIR = EXP_DIR / "logs"

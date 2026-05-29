@@ -53,3 +53,4 @@ B22042214*
 # 改为 git submodule 引用即可
 # train-ticket/
 train-ticket/
+.env

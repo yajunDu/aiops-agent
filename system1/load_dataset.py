@@ -1,3 +1,5 @@
+import sys as _s; from pathlib import Path as _P
+_s.path.insert(0, str(_P(__file__).resolve().parents[1]))
 """
 11.1 数据集加载器 V2 - 修复版
 ==============================
@@ -14,8 +16,8 @@ import numpy as np
 import pandas as pd
 
 
-EXP_DIR = Path("~/aiops-project/experiments").expanduser()
-OUT_DIR = Path("~/aiops-project/system1/outputs").expanduser()
+from aiops_paths import EXP_DIR, SYSTEM1_OUT
+OUT_DIR = SYSTEM1_OUT
 OUT_DIR.mkdir(exist_ok=True, parents=True)
 
 WINDOW_SECS = 15

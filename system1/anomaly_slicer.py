@@ -1,3 +1,5 @@
+import sys as _s; from pathlib import Path as _P
+_s.path.insert(0, str(_P(__file__).resolve().parents[1]))
 """
 11.3 + 11.4 异常切片器 + 实验级评估
 ====================================
@@ -24,8 +26,8 @@ import numpy as np
 import pandas as pd
 
 
-OUT = Path("~/aiops-project/system1/outputs").expanduser()
-FIG = Path("~/aiops-project/system1/figures").expanduser()
+from aiops_paths import SYSTEM1_OUT as OUT
+from aiops_paths import SYSTEM1_FIG as FIG
 
 WINDOW_SECS = 15
 MIN_SLICE_GAP = 30  # 切片内允许的窗口间隔（秒）

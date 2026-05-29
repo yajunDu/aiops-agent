@@ -13,6 +13,8 @@
 输出: outputs/system2_predictions.csv
 """
 from __future__ import annotations
+import sys as _s; from pathlib import Path as _P
+_s.path.insert(0, str(_P(__file__).resolve().parents[2]))
 import json
 import subprocess
 import time
@@ -26,8 +28,8 @@ _sys.path.insert(0, str(Path(__file__).parent / 'tools'))
 from tools_prom_replay import set_active_experiment
 
 
-SYSTEM1_OUT = Path("~/aiops-project/system1/outputs").expanduser()
-SYSTEM2_OUT = Path("~/aiops-project/system2/outputs").expanduser()
+from aiops_paths import SYSTEM1_OUT, SYSTEM2_OUT
+
 SYSTEM2_OUT.mkdir(exist_ok=True, parents=True)
 
 

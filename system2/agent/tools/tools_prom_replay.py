@@ -1,9 +1,11 @@
+import sys as _s; from pathlib import Path as _P
+_s.path.insert(0, str(_P(__file__).resolve().parents[3]))
 """12.4-B 历史回放版指标工具（带 restart 台阶检测）"""
 import json
 from pathlib import Path
 import pandas as pd
 
-EXP_DIR = Path("~/aiops-project/experiments").expanduser()
+from aiops_paths import EXP_DIR
 METRICS_DIR = EXP_DIR / "metrics"
 GT_DIR = EXP_DIR / "ground-truth"
 

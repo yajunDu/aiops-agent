@@ -1,0 +1,26 @@
+# ── Web 后端 ──
+fastapi>=0.110
+uvicorn>=0.27
+pydantic>=2.0
+requests>=2.31
+
+# ── LLM Agent ──
+langgraph>=0.2
+langchain-core>=0.3
+langchain-openai>=0.2
+openai>=1.30
+
+# ── 数据 / 系统1 ──
+pandas>=2.0
+numpy>=1.24
+scikit-learn>=1.3
+joblib>=1.3
+pyarrow>=14.0          # parquet 读写
+
+# ── 图谱 ──
+neo4j>=5.0
+
+# ── 基线 / 可视化 ──
+networkx>=3.0
+matplotlib>=3.7
+pyyaml>=6.0

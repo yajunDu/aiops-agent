@@ -12,6 +12,8 @@ UI 后端 API 服务（FastAPI）
   POST /api/diagnose           调用 Agent 真推理（用于 reasoning 页）
 """
 from __future__ import annotations
+import sys as _s; from pathlib import Path as _P
+_s.path.insert(0, str(_P(__file__).resolve().parents[1]))
 import asyncio
 import json
 import os
@@ -28,8 +30,9 @@ import pandas as pd
 import requests
 
 # 让 import 走 agent 模块
-sys.path.insert(0, str(Path("~/aiops-project/system2/agent").expanduser()))
-sys.path.insert(0, str(Path("~/aiops-project/system2/agent/tools").expanduser()))
+from aiops_paths import AGENT_PATH, TOOLS_PATH, SYSTEM1_OUT, SYSTEM2_OUT, BASELINES
+sys.path.insert(0, str(AGENT_PATH))
+sys.path.insert(0, str(TOOLS_PATH))
 
 VLLM_URL = "http://localhost:8000/v1"
 NEO4J_URI = "bolt://localhost:7687"
@@ -37,9 +40,9 @@ NEO4J_USER = "neo4j"
 NEO4J_PWD = os.getenv("NEO4J_PWD", "aiops2026")
 PROM_URL = "http://localhost:30090"
 
-SYS1_OUT = Path("~/aiops-project/system1/outputs").expanduser()
-SYS2_OUT = Path("~/aiops-project/system2/outputs").expanduser()
-BASELINES = Path("~/aiops-project/system2/baselines").expanduser()
+SYS1_OUT = SYSTEM1_OUT
+SYS2_OUT = SYSTEM2_OUT
+BASELINES = BASELINES
 
 
 app = FastAPI(title="AIOps UI Backend")

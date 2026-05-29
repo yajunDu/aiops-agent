@@ -13,6 +13,8 @@
 预期：CPU 高，NETWORK 中等（LLM 一次性看不清），POD_KILL 一般
 """
 from __future__ import annotations
+import sys as _s; from pathlib import Path as _P
+_s.path.insert(0, str(_P(__file__).resolve().parents[2]))
 import json
 import sys
 from pathlib import Path
@@ -20,7 +22,7 @@ from pathlib import Path
 import pandas as pd
 from openai import OpenAI
 
-EXP_DIR = Path("~/aiops-project/experiments").expanduser()
+from aiops_paths import EXP_DIR, SYSTEM1_OUT
 METRICS_DIR = EXP_DIR / "metrics"
 
 VLLM_URL = "http://localhost:8000/v1"
@@ -99,7 +101,7 @@ def predict_one(client: OpenAI, exp_id: str, target_service: str) -> dict:
 def main():
     client = OpenAI(base_url=VLLM_URL, api_key="dummy")
     
-    exp_df = pd.read_csv(Path("~/aiops-project/system1/outputs/experiment_results.csv").expanduser())
+    exp_df = pd.read_csv((SYSTEM1_OUT / "experiment_results.csv"))
     detected = exp_df[exp_df["detected"] == True]
     
     results = []
