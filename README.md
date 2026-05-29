@@ -111,6 +111,9 @@
 
 ## 🚀 快速开始
 
+> 📘 **从零完整部署**（含 K8s 集群 + TrainTicket + 监控栈）请看 **[DEPLOYMENT.md](DEPLOYMENT.md)**，下面是核心步骤速览。
+
+
 ### 前置条件
 
 - Linux 系统（推荐 Ubuntu 22.04 / WSL2）
