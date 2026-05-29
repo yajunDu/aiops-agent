@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { Brain, Send, Bot, User, Loader2, Sparkles, Lock } from "lucide-react";
+import { Brain, Send, Bot, User, Loader2, Sparkles } from "lucide-react";
 import { api, type ChatMessage, type DiagnoseResult } from "@/lib/api";
 import { cn } from "@/lib/utils";
 
@@ -11,93 +11,42 @@ export default function ReasoningPage() {
   const [input, setInput] = useState("");
   const [sending, setSending] = useState(false);
   const chatEndRef = useRef<HTMLDivElement>(null);
-
-  // ============ Agent 推理（仅可由对话触发） ============
-  const [diagnosing, setDiagnosing] = useState(false);
-  const [diagnose, setDiagnose] = useState<DiagnoseResult | null>(null);
-  const [agentStatus, setAgentStatus] = useState<string>(""); // 实时状态文字
-
+  
   useEffect(() => {
     chatEndRef.current?.scrollIntoView({ behavior: "smooth" });
-  }, [messages, diagnose]);
-
-  // 触发右侧 Agent 真推理（由聊天侧驱动）
-  const triggerAgent = async (targetService: string) => {
-    setDiagnosing(true);
-    setDiagnose(null);
-    setAgentStatus(`正在为 ${targetService} 调用 Agent...`);
-    
-    try {
-      // 渐进式状态更新（视觉效果）
-      await new Promise(r => setTimeout(r, 300));
-      setAgentStatus("Step 1/3: 查询 Neo4j 图谱拓扑...");
-      
-      await new Promise(r => setTimeout(r, 800));
-      setAgentStatus("Step 2/3: Prometheus 拉取 Pod 指标...");
-      
-      // 真实调用 /api/diagnose
-      const res = await api.diagnose();
-      
-      setAgentStatus("Step 3/3: LLM 综合证据生成结论...");
-      await new Promise(r => setTimeout(r, 500));
-      
-      setDiagnose(res);
-      setAgentStatus("");
-      return res;
-    } catch (e) {
-      setAgentStatus(`❌ Agent 失败: ${(e as Error).message}`);
-      return null;
-    } finally {
-      setDiagnosing(false);
-    }
-  };
+  }, [messages]);
 
   const sendMessage = async () => {
     if (!input.trim() || sending) return;
     const userMsg: ChatMessage = { role: "user", content: input };
     const newMessages = [...messages, userMsg];
     setMessages(newMessages);
-    const userInput = input;
     setInput("");
     setSending(true);
 
     try {
-      // 第 1 步: 调 /api/chat
-      const res = await api.chat(userInput, messages);
-      
-      // 第 2 步: 检查是不是诊断意图（注：后端要支持返回 intent + target_service）
-      const isDiagnose = (res as any).intent === "diagnose" && (res as any).target_service;
-      const targetService = (res as any).target_service;
-      
-      if (isDiagnose) {
-        // 左侧先显示"调度中"提示
-        setMessages([...newMessages, { 
-          role: "assistant", 
-          content: `🔄 检测到诊断请求，正在为 ${targetService} 调度 LangGraph Agent...\n请看右侧实时推理过程。` 
-        }]);
-        
-        // 等 UI 渲染
-        await new Promise(r => setTimeout(r, 500));
-        
-        // 触发右侧 Agent
-        const agentResult = await triggerAgent(targetService);
-        
-        // 等右侧渲染完
-        await new Promise(r => setTimeout(r, 800));
-        
-        // 把 /api/chat 返回的完整报告输出到左侧聊天
-        setMessages(prev => [
-          ...prev.slice(0, -1), // 去掉"调度中"
-          { role: "assistant", content: res.reply }
-        ]);
-      } else {
-        // 普通对话直接显示
-        setMessages([...newMessages, { role: "assistant", content: res.reply }]);
-      }
+      const res = await api.chat(input, messages);
+      setMessages([...newMessages, { role: "assistant", content: res.reply }]);
     } catch (e) {
       setMessages([...newMessages, { role: "assistant", content: `❌ 调用失败: ${(e as Error).message}` }]);
     } finally {
       setSending(false);
+    }
+  };
+
+  // ============ Agent 推理 ============
+  const [diagnosing, setDiagnosing] = useState(false);
+  const [diagnose, setDiagnose] = useState<DiagnoseResult | null>(null);
+
+  const runDiagnose = async () => {
+    setDiagnosing(true);
+    try {
+      const res = await api.diagnose();
+      setDiagnose(res);
+    } catch (e) {
+      alert(`推理失败: ${(e as Error).message}`);
+    } finally {
+      setDiagnosing(false);
     }
   };
 
@@ -106,18 +55,17 @@ export default function ReasoningPage() {
       <header>
         <h1 className="text-2xl font-bold text-zinc-900">双系统推理</h1>
         <p className="text-sm text-zinc-500 mt-1">
-          自由问诊驱动 · Agent 工具调用透明可见 · 端到端根因闭环
+          系统 1 异常切片 · 系统 2 LLM Agent 工具调用 · 实时根因诊断
         </p>
       </header>
 
       <div className="grid grid-cols-2 gap-6">
-        {/* ============ 左侧：自由问诊 ============ */}
+        {/* ============ 左侧：自由问答 ============ */}
         <div className="rounded-lg border border-zinc-200 bg-white flex flex-col h-[650px]">
           <div className="px-5 py-3 border-b border-zinc-200 flex items-center gap-2">
             <Bot className="w-4 h-4 text-blue-600" />
             <h3 className="text-sm font-semibold text-zinc-900">自由问诊</h3>
             <span className="text-[10px] bg-blue-100 text-blue-700 px-1.5 py-0.5 rounded font-mono">Qwen2.5-7B</span>
-            <span className="ml-auto text-[10px] text-zinc-400">输入 &quot;诊断 ts-xxx-service&quot; 自动触发右侧 Agent</span>
           </div>
 
           <div className="flex-1 overflow-y-auto p-5 space-y-3">
@@ -125,10 +73,10 @@ export default function ReasoningPage() {
               <div className="text-center text-sm text-zinc-400 mt-20">
                 <Sparkles className="w-8 h-8 mx-auto mb-3 text-zinc-300" />
                 向 AI 提问，例如：<br/>
-                <span className="text-xs font-mono mt-2 inline-block leading-relaxed">
-                  · 系统现在有什么问题？<br/>
-                  · 诊断 ts-seat-service<br/>
-                  · 什么是 Pod CrashLoopBackOff？
+                <span className="text-xs font-mono mt-2 inline-block">
+                  · 什么是 Pod CrashLoopBackOff？<br/>
+                  · 解释一下孤立森林算法的原理<br/>
+                  · 我的集群有 24 个服务持续重启，怎么排查？
                 </span>
               </div>
             )}
@@ -190,7 +138,7 @@ export default function ReasoningPage() {
           </div>
         </div>
 
-        {/* ============ 右侧：Agent 真推理（仅显示，不可手动触发） ============ */}
+        {/* ============ 右侧：Agent 真推理 ============ */}
         <div className="rounded-lg border border-zinc-200 bg-white flex flex-col h-[650px]">
           <div className="px-5 py-3 border-b border-zinc-200 flex items-center justify-between">
             <div className="flex items-center gap-2">
@@ -198,67 +146,36 @@ export default function ReasoningPage() {
               <h3 className="text-sm font-semibold text-zinc-900">根因诊断（LangGraph Agent）</h3>
               <span className="text-[10px] bg-emerald-100 text-emerald-700 px-1.5 py-0.5 rounded font-mono">Tool-Calling</span>
             </div>
-            
-            {/* 按钮永远禁用 + 加锁图标 */}
             <button
-              disabled={true}
-              title="仅可由左侧聊天输入 '诊断 ts-xxx-service' 触发"
-              className="px-3 py-1.5 bg-zinc-200 text-zinc-500 rounded-md text-xs flex items-center gap-1.5 cursor-not-allowed border border-zinc-300"
+              onClick={runDiagnose}
+              disabled={diagnosing}
+              className="px-3 py-1.5 bg-emerald-600 text-white rounded-md text-xs flex items-center gap-1.5 disabled:opacity-50 hover:bg-emerald-700"
             >
-              {diagnosing ? (
-                <>
-                  <Loader2 className="w-3 h-3 animate-spin" /> Agent 推理中
-                </>
-              ) : (
-                <>
-                  <Lock className="w-3 h-3" /> 由对话触发
-                </>
-              )}
+              {diagnosing ? <><Loader2 className="w-3 h-3 animate-spin" /> 推理中</> : <>▶ 执行诊断</>}
             </button>
           </div>
 
           <div className="flex-1 overflow-y-auto p-5">
-            {/* 默认提示 */}
             {!diagnose && !diagnosing && (
               <div className="text-center text-sm text-zinc-400 mt-20">
                 <Brain className="w-8 h-8 mx-auto mb-3 text-zinc-300" />
-                <div className="mb-3">Agent 待命中</div>
-                <span className="text-xs text-zinc-500 inline-block leading-relaxed">
-                  ⏱️ 自动触发条件：<br/>
-                  <span className="font-mono text-blue-600 mt-2 inline-block">
-                    在左侧输入 &quot;诊断 ts-xxx-service&quot;
-                  </span><br/>
-                  Agent 将自动执行 GraphRAG + Tool-Calling
+                点击 &quot;执行诊断&quot; 触发 Agent 真推理<br/>
+                <span className="text-xs font-mono mt-2 inline-block">
+                  默认场景：ts-gateway-service CPU 故障注入<br/>
+                  约耗时 5 秒（含 3 轮工具调用）
                 </span>
               </div>
             )}
 
-            {/* 推理中（带实时步骤）*/}
             {diagnosing && (
-              <div className="space-y-3">
-                <div className="text-center mb-4">
-                  <Loader2 className="w-8 h-8 mx-auto mb-3 animate-spin text-emerald-500" />
-                  <p className="text-sm text-emerald-600 font-medium">LangGraph Agent 推理中...</p>
-                </div>
-                
-                {/* 实时状态条 */}
-                <div className="rounded-lg bg-emerald-50 border border-emerald-200 p-3">
-                  <div className="flex items-center gap-2 text-xs text-emerald-700 font-mono">
-                    <div className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></div>
-                    {agentStatus || "初始化..."}
-                  </div>
-                </div>
-                
-                {/* 工具调用阶段提示 */}
-                <div className="rounded bg-zinc-50 p-3 text-xs text-zinc-500 font-mono space-y-1">
-                  <div>perceive → plan → act → reflect → finalize</div>
-                  <div className="text-zinc-400">5 节点 LangGraph 状态机</div>
-                </div>
+              <div className="text-center text-sm text-zinc-500 mt-20">
+                <Loader2 className="w-8 h-8 mx-auto mb-3 animate-spin text-emerald-500" />
+                Agent 正在调用工具...<br/>
+                <span className="text-xs font-mono text-zinc-400">query_graph_topology → get_pod_metrics</span>
               </div>
             )}
 
-            {/* 推理结果 */}
-            {diagnose && !diagnosing && (
+            {diagnose && (
               <div className="space-y-3">
                 {/* 结论卡 */}
                 <div className="rounded-lg bg-emerald-50 border border-emerald-200 p-3">

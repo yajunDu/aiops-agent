@@ -12,14 +12,7 @@ from typing import Annotated, Literal, TypedDict
 # 让 agent 能 import tools/
 sys.path.insert(0, str(Path(__file__).parent / "tools"))
 from tools_neo4j import query_graph_topology  # noqa
-import os
-# AIOPS_LIVE_MODE=1 → 实时 Prometheus（smart_chat 用）；否则历史回放（coordinator 批量评测用）
-if os.getenv("AIOPS_LIVE_MODE", "0") == "1":
-    from tools_prom import get_pod_metrics  # noqa
-    def set_active_experiment(exp_id):  # noqa
-        pass
-else:
-    from tools_prom_replay import get_pod_metrics, set_active_experiment  # noqa
+from tools_prom_replay import get_pod_metrics, set_active_experiment  # noqa
 
 from langchain_core.messages import AIMessage, BaseMessage, HumanMessage, SystemMessage, ToolMessage
 from langchain_openai import ChatOpenAI
@@ -159,34 +152,18 @@ def finalize(state):
         text = last.content if isinstance(last.content, str) else str(last.content)
 
     # 解析 JSON
-    root_cause = text[:300]
-    confidence = 0.3
-    fault_type = ""
     try:
         l, r = text.find("{"), text.rfind("}")
         if l >= 0 and r > l:
             p = json.loads(text[l:r+1])
-            root_cause = p.get("root_cause", text[:200])
-            confidence = float(p.get("confidence", 0.5))
-            fault_type = str(p.get("fault_type", "")).upper().strip()
+            return {
+                "root_cause": p.get("root_cause", "未明确"),
+                "confidence": float(p.get("confidence", 0.5)),
+                "pred_fault_type": str(p.get("fault_type", "")).upper(),
+            }
     except Exception:
         pass
-
-    # ★ fault_type 提取不到时，从 root_cause 文本推断（解决总是 UNKNOWN 问题）
-    if not fault_type or fault_type == "UNKNOWN":
-        t = (root_cause or "").lower()
-        if any(k in t for k in ["cpu", "节流", "throttle", "计算", "处理器", "峰值", "峰均", "load"]):
-            fault_type = "CPU"
-        elif any(k in t for k in ["network", "网络", "延迟", "丢包", "latency", "loss", "drop", "通信"]):
-            fault_type = "NETWORK"
-        elif any(k in t for k in ["重启", "restart", "kill", "杀", "调度", "pod_kill", "pod-kill", "销毁"]):
-            fault_type = "POD_KILL"
-
-    return {
-        "root_cause": root_cause,
-        "confidence": confidence,
-        "pred_fault_type": fault_type if fault_type else "UNKNOWN",
-    }
+    return {"root_cause": text[:200], "confidence": 0.3}
 
 
 def route(state) -> Literal["act", "finalize"]:

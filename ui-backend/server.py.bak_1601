@@ -156,7 +156,7 @@ def list_services():
         cpu_val = cpu_map.get(name, 0) * 100  # 转 %
         mem_val = mem_map.get(name, 0) / (1024 ** 2)  # MB
 
-        # 状态判定（cpu_val 是绝对核数*100，train-ticket Pod limit≈0.5核，>40 即高负载告警）
+        # 状态判定
         if phase != "Running" or not ready:
             status = "error" if restart_count >= 3 else "warning"
         elif cpu_val > 40:
