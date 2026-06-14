@@ -1,0 +1,17 @@
+{
+  "experiment_id": "20260519-163414-cpu-gateway",
+  "fault_type": "CPU",
+  "target_service": "ts-gateway-service",
+  "target_namespace": "train-ticket",
+  "root_pod": "ts-gateway-service-645fbbbdc5-d5q2s",
+  "root_host": "fresne",
+  "t_inject_unix": 1779179654,
+  "t_inject_iso": "2026-05-19T16:34:14.411539",
+  "params": {
+    "load_pct": 95,
+    "duration_sec": 60,
+    "workers": 2
+  },
+  "metrics_window_start": 1779179474,
+  "metrics_window_end": 1779179839
+}

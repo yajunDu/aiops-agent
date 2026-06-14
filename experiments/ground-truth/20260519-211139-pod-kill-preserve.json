@@ -1,0 +1,15 @@
+{
+  "experiment_id": "20260519-211139-pod-kill-preserve",
+  "fault_type": "POD_KILL",
+  "target_service": "ts-preserve-service",
+  "target_namespace": "train-ticket",
+  "root_pod": "ts-preserve-service-66ccf4fd9f-pd79s",
+  "root_host": "fresne",
+  "t_inject_unix": 1779196299,
+  "t_inject_iso": "2026-05-19T21:11:39.806163",
+  "params": {
+    "grace_period_sec": 0
+  },
+  "metrics_window_start": 1779196119,
+  "metrics_window_end": 1779196492
+}

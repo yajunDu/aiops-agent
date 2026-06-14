@@ -1,0 +1,18 @@
+{
+  "experiment_id": "20260519-192159-network-seat",
+  "fault_type": "NETWORK",
+  "target_service": "ts-seat-service",
+  "target_namespace": "train-ticket",
+  "root_pod": "ts-seat-service-6b7ff9bbd8-4gz57",
+  "root_host": "fresne",
+  "t_inject_unix": 1779189719,
+  "t_inject_iso": "2026-05-19T19:21:59.602834",
+  "params": {
+    "latency_ms": 384,
+    "jitter_ms": 56,
+    "loss_pct": 4,
+    "duration_sec": 60
+  },
+  "metrics_window_start": 1779189539,
+  "metrics_window_end": 1779189910
+}

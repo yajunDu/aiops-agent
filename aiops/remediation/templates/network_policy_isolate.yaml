@@ -1,0 +1,13 @@
+name: network_policy_isolate
+display_name: 网络策略隔离
+fault_types: [NETWORK]
+description: 临时下发 NetworkPolicy 隔离异常 Pod，阻断异常调用链
+params:
+  required: [pod_label_selector, namespace]
+  optional: []
+preconditions:
+  - in_managed_namespace
+commands:
+  - "kubectl apply -f - <<EOF\napiVersion: networking.k8s.io/v1\nkind: NetworkPolicy\nmetadata:\n  name: isolate-{pod_label_selector}\n  namespace: {namespace}\nspec:\n  podSelector:\n    matchLabels:\n      app: {pod_label_selector}\n  policyTypes: [Ingress, Egress]\nEOF"
+risk_level: high
+estimated_mttr_sec: 20

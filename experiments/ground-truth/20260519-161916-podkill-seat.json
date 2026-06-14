@@ -1,0 +1,12 @@
+{
+  "experiment_id": "20260519-161916-podkill-seat",
+  "tinject": "2026-05-19 16:19:11",
+  "tinject_unix": 1779178751,
+  "fault_type": "POD_KILL",
+  "target_service": "ts-seat-service",
+  "target_namespace": "train-ticket",
+  "root_pod_before": "ts-seat-service-6b7ff9bbd8-jrnsb",
+  "root_host": "fresne",
+  "grace_period_sec": 0,
+  "expected_victims": ["ts-preserve-service", "ts-travel-service"]
+}

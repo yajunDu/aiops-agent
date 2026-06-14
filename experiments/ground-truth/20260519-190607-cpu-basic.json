@@ -1,0 +1,17 @@
+{
+  "experiment_id": "20260519-190607-cpu-basic",
+  "fault_type": "CPU",
+  "target_service": "ts-basic-service",
+  "target_namespace": "train-ticket",
+  "root_pod": "ts-basic-service-7c5f8bcd8f-qpsbv",
+  "root_host": "fresne",
+  "t_inject_unix": 1779188768,
+  "t_inject_iso": "2026-05-19T19:06:08.059395",
+  "params": {
+    "load_pct": 93,
+    "duration_sec": 60,
+    "workers": 2
+  },
+  "metrics_window_start": 1779188588,
+  "metrics_window_end": 1779188956
+}

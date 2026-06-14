@@ -1,0 +1,17 @@
+name: cordon_node
+display_name: 隔离故障节点
+fault_types: [POD_KILL, CPU]
+description: 标记节点不可调度，新 Pod 不会落到此节点。仅在确认是节点级故障时使用
+params:
+  required: [node_name]
+  optional: []
+preconditions:
+  - node_exists
+  - is_worker_node
+  - cluster_has_other_ready_nodes
+commands:
+  - "kubectl cordon {node_name}"
+post_check:
+  - "kubectl get node {node_name} -o jsonpath='{.spec.unschedulable}'"
+risk_level: high
+estimated_mttr_sec: 10

@@ -1,0 +1,17 @@
+{
+  "experiment_id": "20260519-173116-cpu-seat",
+  "fault_type": "CPU",
+  "target_service": "ts-seat-service",
+  "target_namespace": "train-ticket",
+  "root_pod": "ts-seat-service-6b7ff9bbd8-4gz57",
+  "root_host": "fresne",
+  "t_inject_unix": 1779183078,
+  "t_inject_iso": "2026-05-19T17:31:18.745396",
+  "params": {
+    "load_pct": 76,
+    "duration_sec": 60,
+    "workers": 2
+  },
+  "metrics_window_start": 1779182898,
+  "metrics_window_end": 1779183266
+}

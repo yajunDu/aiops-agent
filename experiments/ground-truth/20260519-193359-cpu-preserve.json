@@ -1,0 +1,17 @@
+{
+  "experiment_id": "20260519-193359-cpu-preserve",
+  "fault_type": "CPU",
+  "target_service": "ts-preserve-service",
+  "target_namespace": "train-ticket",
+  "root_pod": "ts-preserve-service-66ccf4fd9f-pd79s",
+  "root_host": "fresne",
+  "t_inject_unix": 1779190439,
+  "t_inject_iso": "2026-05-19T19:33:59.743451",
+  "params": {
+    "load_pct": 75,
+    "duration_sec": 60,
+    "workers": 2
+  },
+  "metrics_window_start": 1779190259,
+  "metrics_window_end": 1779190631
+}

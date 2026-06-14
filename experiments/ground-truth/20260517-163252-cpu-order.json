@@ -1,0 +1,12 @@
+{
+  "experiment_id": "20260517-163252-cpu-order",
+  "tinject": "2026-05-17 16:32:46",
+  "fault_type": "CPU_EXHAUSTION",
+  "target_service": "ts-order-service",
+  "target_namespace": "train-ticket",
+  "root_pod": "ts-order-service-5877dcb978-jn6z8",
+  "root_host": "fresne",
+  "load_pct": 95,
+  "duration_sec": 180,
+  "expected_victims": ["ts-gateway-service", "ts-travel-service", "ts-preserve-service"]
+}

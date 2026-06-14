@@ -1,0 +1,34 @@
+{
+  "rows": 1746,
+  "experiments": 67,
+  "pods": 14,
+  "label_distribution": {
+    "0": 1164,
+    "1": 582
+  },
+  "fault_distribution": {
+    "CPU": 775,
+    "NETWORK": 750,
+    "POD_KILL": 221
+  },
+  "features": [
+    "cpu",
+    "memory",
+    "net_rx",
+    "net_tx",
+    "net_rx_drop",
+    "net_tx_drop",
+    "cpu_throttle",
+    "restart",
+    "cpu_zscore",
+    "memory_zscore",
+    "net_rx_zscore",
+    "net_tx_zscore",
+    "net_rx_drop_zscore",
+    "net_tx_drop_zscore",
+    "cpu_throttle_zscore",
+    "restart_zscore"
+  ],
+  "window_secs": 15,
+  "anomaly_duration_secs": 120
+}

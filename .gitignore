@@ -1,0 +1,12 @@
+__pycache__/
+*.pyc
+*.pyo
+.env
+.venv/
+venv/
+*.egg-info/
+.DS_Store
+.idea/
+.vscode/
+experiments/eval_result.json
+memory_cases.jsonl

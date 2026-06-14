@@ -1,0 +1,17 @@
+name: rollback_deployment
+display_name: 回滚至上一版本
+fault_types: [CPU, NETWORK, POD_KILL]
+description: 回滚 Deployment 到上一 ReplicaSet 版本，适用于发布后立即异常的场景
+params:
+  required: [deployment_name, namespace]
+  optional: [target_revision]
+preconditions:
+  - deployment_exists
+  - has_previous_revision
+  - in_managed_namespace
+commands:
+  - "kubectl rollout undo deployment/{deployment_name} -n {namespace}"
+post_check:
+  - "kubectl rollout status deployment/{deployment_name} -n {namespace} --timeout=120s"
+risk_level: medium
+estimated_mttr_sec: 90

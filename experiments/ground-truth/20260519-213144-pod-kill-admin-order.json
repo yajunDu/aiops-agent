@@ -1,0 +1,15 @@
+{
+  "experiment_id": "20260519-213144-pod-kill-admin-order",
+  "fault_type": "POD_KILL",
+  "target_service": "ts-admin-order-service",
+  "target_namespace": "train-ticket",
+  "root_pod": "ts-admin-order-service-78d9f69b68-ff74n",
+  "root_host": "fresne",
+  "t_inject_unix": 1779197505,
+  "t_inject_iso": "2026-05-19T21:31:45.126648",
+  "params": {
+    "grace_period_sec": 0
+  },
+  "metrics_window_start": 1779197325,
+  "metrics_window_end": 1779197698
+}

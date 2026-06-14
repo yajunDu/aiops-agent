@@ -1,0 +1,18 @@
+{
+  "experiment_id": "20260519-200153-network-preserve",
+  "fault_type": "NETWORK",
+  "target_service": "ts-preserve-service",
+  "target_namespace": "train-ticket",
+  "root_pod": "ts-preserve-service-66ccf4fd9f-pd79s",
+  "root_host": "fresne",
+  "t_inject_unix": 1779192113,
+  "t_inject_iso": "2026-05-19T20:01:53.585926",
+  "params": {
+    "latency_ms": 243,
+    "jitter_ms": 32,
+    "loss_pct": 3,
+    "duration_sec": 60
+  },
+  "metrics_window_start": 1779191933,
+  "metrics_window_end": 1779192304
+}

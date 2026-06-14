@@ -1,0 +1,17 @@
+{
+  "experiment_id": "20260519-184618-cpu-ui-dashboard",
+  "fault_type": "CPU",
+  "target_service": "ts-ui-dashboard",
+  "target_namespace": "train-ticket",
+  "root_pod": "ts-ui-dashboard-5b584ff884-6zqqq",
+  "root_host": "fresne",
+  "t_inject_unix": 1779187578,
+  "t_inject_iso": "2026-05-19T18:46:18.525666",
+  "params": {
+    "load_pct": 79,
+    "duration_sec": 60,
+    "workers": 2
+  },
+  "metrics_window_start": 1779187398,
+  "metrics_window_end": 1779187766
+}

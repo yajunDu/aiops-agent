@@ -1,0 +1,18 @@
+{
+  "experiment_id": "20260519-181039-network-admin-order",
+  "fault_type": "NETWORK",
+  "target_service": "ts-admin-order-service",
+  "target_namespace": "train-ticket",
+  "root_pod": "ts-admin-order-service-78d9f69b68-ff74n",
+  "root_host": "fresne",
+  "t_inject_unix": 1779185439,
+  "t_inject_iso": "2026-05-19T18:10:39.885217",
+  "params": {
+    "latency_ms": 377,
+    "jitter_ms": 30,
+    "loss_pct": 2,
+    "duration_sec": 60
+  },
+  "metrics_window_start": 1779185259,
+  "metrics_window_end": 1779185629
+}

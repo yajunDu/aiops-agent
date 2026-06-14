@@ -1,0 +1,17 @@
+name: scale_deployment
+display_name: 横向扩容
+fault_types: [CPU, NETWORK]
+description: 增加 Deployment 副本数分摊负载，适用于 CPU 持续高位或网络瓶颈
+params:
+  required: [deployment_name, namespace, replicas]
+  optional: [original_replicas]
+preconditions:
+  - deployment_exists
+  - in_managed_namespace
+  - replicas_in_range
+commands:
+  - "kubectl scale deployment {deployment_name} -n {namespace} --replicas={replicas}"
+post_check:
+  - "kubectl rollout status deployment/{deployment_name} -n {namespace} --timeout=120s"
+risk_level: medium
+estimated_mttr_sec: 60

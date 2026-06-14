@@ -1,0 +1,18 @@
+{
+  "experiment_id": "20260519-164343-network-ui-dashboard",
+  "fault_type": "NETWORK",
+  "target_service": "ts-ui-dashboard",
+  "target_namespace": "train-ticket",
+  "root_pod": "ts-ui-dashboard-5b584ff884-6zqqq",
+  "root_host": "fresne",
+  "t_inject_unix": 1779180223,
+  "t_inject_iso": "2026-05-19T16:43:43.953438",
+  "params": {
+    "latency_ms": 328,
+    "jitter_ms": 52,
+    "loss_pct": 2,
+    "duration_sec": 60
+  },
+  "metrics_window_start": 1779180043,
+  "metrics_window_end": 1779180409
+}
